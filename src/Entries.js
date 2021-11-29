@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import "./App.css";
 import { MdCake } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
@@ -25,7 +25,7 @@ function Entries({ persons, setPersons }) {
       },
       ...persons,
     ]);
-    console.log(present.current.value);
+
     eingabeFeld.current.value = "";
     eingabeFeld2.current.value = "";
     present.current.checked = "";
@@ -83,8 +83,9 @@ function Entries({ persons, setPersons }) {
         <span className="btn" onClick={newEntry}>
           <MdCake /> Save
         </span>
-
-        
+        <div>
+          <Link to={"/data/"}>Your Friends</Link>
+        </div>
       </div>
     </div>
   );

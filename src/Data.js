@@ -1,61 +1,73 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import "./App.css";
 import { MdEmojiPeople } from "react-icons/md";
+import { IoMdTrash } from "react-icons/io";
+import { useParams, useNavigate } from "react-router-dom";
 
 // var person = [{ name: "Seba", gift: "present" }];
 
 function Data({ persons, setPersons }) {
   const input = useRef();
+  const { search } = useParams();
+
+  const navigate = useNavigate();
+  console.log(persons);
+
+  function deleteItem(idtobedeleted) {
+    var filtered = persons.filter((element) => element.id !== idtobedeleted);
+    // localStorage.setItem("todos", JSON.stringify(filtered));
+    console.log(filtered);
+    setPersons(filtered);
+  }
 
   let oneperson = persons.map((element) => (
-    <div>
-      <li>{element.name}</li>
-      <li>{element.date}</li>
-      <li>{element.present}</li>
-      <li>{element.postcard}</li>
-      <li>{element.message}</li>
+    <div key={element.id}>
+      <div>
+        {element.name}
+        <IoMdTrash onClick={() => deleteItem(element.id)} />
+      </div>
+      <div>{element.date}</div>
+      <div>{element.present}</div>
+      <div>{element.postcard}</div>
+      <div>{element.message}</div>
     </div>
   ));
-  // console.log(oneperson);
+  var objectFound = persons.filter((element) => element.name == search);
+  console.log(objectFound);
 
-  useEffect(() => {
-    const storage = localStorage.getItem("persons");
-    if (storage) {
-      setPersons(JSON.parse(localStorage.getItem("persons")));
-    }
-  }, []);
-  useEffect(() => {
-    // Ausführung bei Änderung des todos-State ([todos])
+  let newArray = objectFound.map((element) => (
+    <div key={element.id}>
+      <div>{element.name}</div>
+      <div>{element.date}</div>
+      <div>{element.present}</div>
+      <div>{element.postcard}</div>
+      <div>{element.message}</div>
+    </div>
+  ));
+  console.log(newArray);
 
-    localStorage.setItem("todos", JSON.stringify(persons));
-  }, [persons]);
-
-  function newFind(objectToFind) {
-    var objectFound = persons.filter(
-      (element) => element.name === objectToFind
-    );
-
-    console.log(objectFound);
-  }
-  function newSearch() {
-    newFind(input.current.value);
+  let result = oneperson;
+  if (search == undefined) {
+    result = oneperson;
+  } else {
+    result = newArray;
   }
 
-  // function deleteItem(idtobedeleted) {
-  //   var filtered = value.todos.filter(
-  //     (element) => element.id !== idtobedeleted
-  //   );
-  // }
+  function onClick() {
+    let nameSearch = input.current.value;
+    navigate("/data/" + nameSearch);
+  }
 
   return (
     <div>
       <h1>Your Friends</h1>
       <input ref={input} type="text" placeholder="Search name"></input>
-      <span className="btn" onClick={newSearch}>
+
+      <span className="btn" onClick={onClick}>
         <MdEmojiPeople /> Search
       </span>
 
-      <ul>{oneperson}</ul>
+      <div>{result}</div>
     </div>
   );
 }
