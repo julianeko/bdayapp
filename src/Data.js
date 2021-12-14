@@ -3,12 +3,13 @@ import "./App.css";
 import { MdEmojiPeople } from "react-icons/md";
 import { IoMdTrash } from "react-icons/io";
 import { useParams, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 // var person = [{ name: "Seba", gift: "present" }];
 
 function Data({ persons, setPersons }) {
   const input = useRef();
   const { search } = useParams();
+  const { changedentry } = useParams();
 
   const navigate = useNavigate();
   console.log(persons);
@@ -23,13 +24,14 @@ function Data({ persons, setPersons }) {
   let oneperson = persons.map((element) => (
     <div key={element.id}>
       <div>
-        {element.name}
+        <Link to={"/change/" + element.id}> {element.name}</Link>
         <IoMdTrash onClick={() => deleteItem(element.id)} />
       </div>
       <div>{element.date}</div>
       <div>{element.present}</div>
       <div>{element.postcard}</div>
       <div>{element.message}</div>
+      <div>{element.text}</div>
     </div>
   ));
   var objectFound = persons.filter((element) => element.name == search);
@@ -37,11 +39,15 @@ function Data({ persons, setPersons }) {
 
   let newArray = objectFound.map((element) => (
     <div key={element.id}>
-      <div>{element.name}</div>
+      <div>
+        <Link className="link" to={"/change/" + element.id}> {element.name}</Link>
+        <IoMdTrash onClick={() => deleteItem(element.id)} />
+      </div>
       <div>{element.date}</div>
       <div>{element.present}</div>
       <div>{element.postcard}</div>
       <div>{element.message}</div>
+      <div>{element.text}</div>
     </div>
   ));
   console.log(newArray);
@@ -53,20 +59,21 @@ function Data({ persons, setPersons }) {
     result = newArray;
   }
 
+  
+
   function onClick() {
     let nameSearch = input.current.value;
     navigate("/data/" + nameSearch);
   }
 
   return (
-    <div>
+    <div className="box">
       <h1>Your Friends</h1>
       <input ref={input} type="text" placeholder="Search name"></input>
 
-      <span className="btn" onClick={onClick}>
+      <span className="btn2" onClick={onClick}>
         <MdEmojiPeople /> Search
       </span>
-
       <div>{result}</div>
     </div>
   );

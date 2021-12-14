@@ -3,6 +3,7 @@ import Entries from "./Entries";
 import React, { useState, createContext, useEffect } from "react";
 import Data from "./Data";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Change from "./Change";
 
 export const Context = createContext();
 
@@ -35,8 +36,16 @@ function App() {
               element={<Data persons={persons} setPersons={setPersons} />}
             />
             <Route
+              path="/data/:changedentry"
+              element={<Data persons={persons} setPersons={setPersons} />}
+            />
+            <Route
               path="/data/:search"
               element={<Data persons={persons} setPersons={setPersons} />}
+            />
+            <Route
+              path="/change/:change"
+              element={<Change persons={persons} setPersons={setPersons} />}
             />
           </Routes>
         </BrowserRouter>
