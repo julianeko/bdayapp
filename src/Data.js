@@ -4,12 +4,13 @@ import { MdEmojiPeople } from "react-icons/md";
 import { IoMdTrash } from "react-icons/io";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { AiOutlineSend } from "react-icons/ai";
 // var person = [{ name: "Seba", gift: "present" }];
 
 function Data({ persons, setPersons }) {
   const input = useRef();
   const { search } = useParams();
-  const { changedentry } = useParams();
 
   const navigate = useNavigate();
   console.log(persons);
@@ -22,61 +23,160 @@ function Data({ persons, setPersons }) {
   }
 
   let oneperson = persons.map((element) => (
-    <div key={element.id}>
-      <div>
-        <Link to={"/change/" + element.id}> {element.name}</Link>
-        <IoMdTrash onClick={() => deleteItem(element.id)} />
-      </div>
-      <div>{element.date}</div>
-      <div>{element.present}</div>
-      <div>{element.postcard}</div>
-      <div>{element.message}</div>
-      <div>{element.text}</div>
+    <div>
+      <EntryBoxStyle key={element.id}>
+        <BinStyle>
+          <div>
+            <LinkStyle to={"/change/" + element.id}> {element.name}</LinkStyle>
+            <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
+          </div>
+        </BinStyle>
+        <div>{element.date}</div>
+        <div>{element.present}</div>
+        <div>{element.postcard}</div>
+        <div>{element.message}</div>
+        <div>{element.text}</div>
+      </EntryBoxStyle>
     </div>
   ));
-  var objectFound = persons.filter((element) => element.name == search);
+  console.log(oneperson);
+  console.log(persons);
+
+  var re = new RegExp(search, "gim");
+
+  var objectFound = persons.filter((element) => {
+    var help = re.test(element.name);
+    return help;
+  });
   console.log(objectFound);
 
   let newArray = objectFound.map((element) => (
-    <div key={element.id}>
-      <div>
-        <Link className="link" to={"/change/" + element.id}> {element.name}</Link>
-        <IoMdTrash onClick={() => deleteItem(element.id)} />
-      </div>
-      <div>{element.date}</div>
-      <div>{element.present}</div>
-      <div>{element.postcard}</div>
-      <div>{element.message}</div>
-      <div>{element.text}</div>
+    <div>
+      <EntryBoxStyle key={element.id}>
+        <BinStyle>
+          <div>
+            <LinkStyle className="link" to={"/change/" + element.id}>
+              {element.name}
+            </LinkStyle>
+          </div>
+          <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
+        </BinStyle>
+        <div>{element.date}</div>
+        <div>{element.present}</div>
+        <div>{element.postcard}</div>
+        <div>{element.message}</div>
+        <div>{element.text}</div>
+      </EntryBoxStyle>
     </div>
   ));
   console.log(newArray);
 
   let result = oneperson;
-  if (search == undefined) {
+  if (search === undefined) {
     result = oneperson;
   } else {
     result = newArray;
   }
 
-  
-
   function onClick() {
     let nameSearch = input.current.value;
     navigate("/data/" + nameSearch);
   }
+  function pressEnter(event) {
+    if (event.key === "Enter") {
+      onClick();
+      event.preventDefault();
+    }
+  }
 
   return (
-    <div className="box">
-      <h1>Your Friends</h1>
-      <input ref={input} type="text" placeholder="Search name"></input>
+    <div className="container">
+      <div className="box">
+        <h1>Your Friends</h1>
+        <RowStyle>
+          <InputStyle
+            ref={input}
+            type="text"
+            placeholder="Search name"
+            onKeyPress={pressEnter}
+          ></InputStyle>
+          <AiOutlineSendStyle onClick={onClick} />
+        </RowStyle>
 
-      <span className="btn2" onClick={onClick}>
-        <MdEmojiPeople /> Search
-      </span>
-      <div>{result}</div>
+        <div>{result}</div>
+      </div>
     </div>
   );
 }
 
 export default Data;
+
+const EntryBoxStyle = styled.div`
+  margin: 10px;
+  padding: 10px;
+  background-color: #eee8d5;
+  box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+`;
+
+const LinkStyle = styled(Link)`
+  color: #d33682;
+  text-decoration: none;
+  &:hover {
+    font-size: 20px;
+  }
+  &:active {
+    font-size: 20px;
+  }
+`;
+const IoMdTrashStyle = styled(IoMdTrash)`
+  position: absolute;
+  color: red;
+  right: 20px;
+  font-size: 25px;
+  color: #2aa198;
+  &:hover {
+    font-size: 30px;
+  }
+  &:active {
+    font-size: 30px;
+  }
+`;
+
+const InputStyle = styled.input`
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 6px;
+  border: 2px solid #2aa198;
+  padding: 2px;
+  width: 350px;
+
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    border: 3px solid #d33682;
+  }
+  &:active {
+    border: 3px solid #d33682;
+  }
+`;
+
+const RowStyle = styled.div`
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+`;
+const BinStyle = styled.div`
+  position: relative;
+`;
+
+const AiOutlineSendStyle = styled(AiOutlineSend)`
+  font-size: 20px;
+  margin-right: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  right: 0px;
+  position: relative;
+`;

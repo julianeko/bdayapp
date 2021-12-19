@@ -35,10 +35,7 @@ function App() {
               path="/data/"
               element={<Data persons={persons} setPersons={setPersons} />}
             />
-            <Route
-              path="/data/:changedentry"
-              element={<Data persons={persons} setPersons={setPersons} />}
-            />
+
             <Route
               path="/data/:search"
               element={<Data persons={persons} setPersons={setPersons} />}

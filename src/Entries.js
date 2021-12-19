@@ -1,10 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
-import { MdCake } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineArrowRight } from "react-icons/ai";
 
 function Entries({ persons, setPersons }) {
   const eingabeFeld = useRef();
@@ -14,41 +13,87 @@ function Entries({ persons, setPersons }) {
   const present = useRef();
   const textarea = useRef();
 
-  // const [action, setAction] = useState([]);
+  const navigate = useNavigate();
 
-  function newEntry() {
-    setPersons([
-      {
-        id: uuidv4(),
-        name: eingabeFeld.current.value,
-        date: eingabeFeld2.current.value,
-        present: present.current.checked ? present.current.value : "",
-        postcard: postcard.current.checked ? postcard.current.value : "",
-        message: message.current.checked ? message.current.value : "",
-        text: textarea.current.value,
-      },
-      ...persons,
-    ]);
+  const [valid, setValid] = useState(true);
+  const [valid2, setValid2] = useState(true);
+  // let icon = (
+  //   <AiOutlineArrowRightStyle>
+  //     <AiOutlineArrowRight />
+  //   </AiOutlineArrowRightStyle>
+  // );
 
-    eingabeFeld.current.value = "";
-    eingabeFeld2.current.value = "";
-    present.current.checked = "";
-    postcard.current.checked = "";
-    message.current.checked = "";
-    textarea.current.value = "";
+  if (valid === true) {
+    var icon = (
+      <AiOutlineArrowRightStyle isvalid={true}>
+        <AiOutlineArrowRight />
+      </AiOutlineArrowRightStyle>
+    );
+  } else {
+    var icon = (
+      <AiOutlineArrowRightStyle isvalid={false}>
+        <AiOutlineArrowRight />
+      </AiOutlineArrowRightStyle>
+    );
   }
 
-  // const handleChange = (event) => {
-  //   setAction(event.target.value);
-  // };
-  // const handleChange2 = (event) => {
-  //   setAction(event.target.value);
-  // };
-  // const handleChange3 = (event) => {
-  //   setAction(event.target.value);
-  // };
+  if (valid2 === true) {
+    var icon2 = (
+      <AiOutlineArrowRightStyle isvalid={true}>
+        <AiOutlineArrowRight />
+      </AiOutlineArrowRightStyle>
+    );
+  } else {
+    var icon2 = (
+      <AiOutlineArrowRightStyle isvalid={false}>
+        <AiOutlineArrowRight />
+      </AiOutlineArrowRightStyle>
+    );
+  }
+
+  function onClickTest() {
+    if (eingabeFeld.current.value === "" && eingabeFeld2.current.value === "") {
+      setValid(false);
+      setValid2(false);
+    } else if (
+      eingabeFeld.current.value !== "" &&
+      eingabeFeld2.current.value === ""
+    ) {
+      setValid(true);
+      setValid2(false);
+    } else if (
+      eingabeFeld2.current.value !== "" &&
+      eingabeFeld.current.value === ""
+    ) {
+      setValid(false);
+      setValid2(true);
+    } else {
+      setPersons([
+        {
+          id: uuidv4(),
+          name: eingabeFeld.current.value,
+          date: eingabeFeld2.current.value,
+          present: present.current.checked ? present.current.value : "",
+          postcard: postcard.current.checked ? postcard.current.value : "",
+          message: message.current.checked ? message.current.value : "",
+          text: textarea.current.value,
+        },
+        ...persons,
+      ]);
+
+      eingabeFeld.current.value = "";
+      eingabeFeld2.current.value = "";
+      present.current.checked = "";
+      postcard.current.checked = "";
+      message.current.checked = "";
+      textarea.current.value = "";
+
+      navigate("/data/");
+    }
+  }
+
   return (
-    <div>
+    <div className="container">
       <div className="box">
         <h1>By-Happy</h1>
         <FlexStyle>
@@ -59,18 +104,20 @@ function Entries({ persons, setPersons }) {
             placeholder="Enter name"
             ref={eingabeFeld}
           ></InputStyle>
+          {icon}
         </FlexStyle>
         <FlexStyle>
-          <LabelStyle>Date of birth:</LabelStyle>
+          <LabelStyle>Date:</LabelStyle>
           <InputStyle
             className="inputstyle"
             ref={eingabeFeld2}
             type="date"
             placeholder="Enter Birthday-Date"
           ></InputStyle>
+          {icon2}
         </FlexStyle>
-        <div>
-          <label>Present:</label>
+        <FlexStyle>
+          <LabelStyle>Present:</LabelStyle>
           <InputStyleBox
             type="checkbox"
             ref={present}
@@ -78,41 +125,39 @@ function Entries({ persons, setPersons }) {
             // checked={action === "Buy and send a present"}
             // onChange={handleChange}
           ></InputStyleBox>
-        </div>
-        <div>
-          <label>Postcard:</label>
-          <input
+        </FlexStyle>
+        <FlexStyle>
+          <LabelStyle>Postcard:</LabelStyle>
+          <InputStyleBox
             type="checkbox"
             ref={postcard}
             value="Buy and send a postcard"
             // checked={action === "Buy and send a postcard"}
             // onChange={handleChange}
-          ></input>
-        </div>
-        <label>Message:</label>
-        <input
-          type="checkbox"
-          ref={message}
-          value="Send a message"
-          // checked={action === "Send a message"}
-          // onChange={handleChange}
-        ></input>
-        <div>
-          Ideas:
+          ></InputStyleBox>
+        </FlexStyle>
+        <FlexStyle>
+          <LabelStyle>Message:</LabelStyle>
+          <InputStyleBox
+            type="checkbox"
+            ref={message}
+            value="Send a message"
+            // checked={action === "Send a message"}
+            // onChange={handleChange}
+          ></InputStyleBox>
+        </FlexStyle>
+        <FlexStyle>
+          <LabelStyle>Ideas:</LabelStyle>
           <InputStyleText
             className="inputstyle"
             ref={textarea}
             type="text"
             placeholder="Add ideas and thoughts"
           ></InputStyleText>
-        </div>
-        <span className="btn" onClick={newEntry}>
-          <MdCake /> Save
-        </span>
-        <div>
-          <Link to={"/data/"}>Your Friends</Link>
-        </div>
-        <CircleStyle />
+        </FlexStyle>
+        <FlexStyle2>
+          <CircleStyle onClick={onClickTest} />
+        </FlexStyle2>
       </div>
     </div>
   );
@@ -121,61 +166,75 @@ function Entries({ persons, setPersons }) {
 export default Entries;
 
 const InputStyle = styled.input`
-  position: absolute;
+  /* position: absolute; */
   right: 10px;
   border-radius: 6px;
   border: 2px solid #2aa198;
   padding: 2px;
-  margin-top: 10px
-  margin-bottom: 10px;
+  width: 150px;
 
   &:focus {
     outline: none;
   }
   &:hover {
-    border: 3px solid #2aa198;
+    border: 3px solid #d33682;
   }
   &:active {
-    border: 3px solid #2aa198;
+    border: 3px solid #d33682;
   }
 `;
 
 const InputStyleText = styled.textarea`
-  position: absolute;
+  /* position: absolute; */
   right: 10px;
   border-radius: 6px;
   border: 2px solid #2aa198;
   padding: 2px;
+  width: 150px;
+  vertical-align: middle;
   &:focus {
     outline: none;
   }
   &:hover {
-    border: 3px solid #2aa198;
+    border: 3px solid #d33682;
   }
   &:active {
-    border: 3px solid #2aa198;
+    border: 3px solid #d33682;
   }
 `;
 const InputStyleBox = styled.input`
-  border: 2 px solid #2aa198;
+  /* position: absolute; */
+  right: 145px;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+ 
+  &:checked, &:not(:checked) {
+    border: solid red;
 `;
 
 const LabelStyle = styled.span`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 10em;
+  display: inline-block;
+  margin-left: 10px;
 `;
 
 const FlexStyle = styled.div`
-  display: flex;
-  flex-direction: row;
+  width: 100%;
+  margin-top: 10px;
+`;
+
+const FlexStyle2 = styled.div`
+  width: 100%;
+  margin-top: 10px;
+  text-align: right;
 `;
 
 const CircleStyle = styled(AiOutlinePlusCircle)`
-  top: 300px;
-  right: 20px;
-  position: absolute;
   color: #d33682;
   font-size: 60px;
+  display: inline-block;
+  /* margin: 20px; */
   &:hover {
     color: #2aa198;
     font-size: 65px;
@@ -184,3 +243,13 @@ const CircleStyle = styled(AiOutlinePlusCircle)`
     color: #2aa198;
   }
 `;
+
+const AiOutlineArrowRightStyle = styled(AiOutlineArrowRight)`
+  /* margin-left: 95px; */
+  margin-top: 2px;
+  color: ${(props) => (props.isvalid ? "#fdf5df" : "green")};
+`;
+/* const AiOutlineArrowRightStyle2 = styled(AiOutlineArrowRight)`
+  margin-left: 40px;
+  margin-top: 2px;
+`; */

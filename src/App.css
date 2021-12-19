@@ -1,12 +1,23 @@
 body {
   height: 100vh;
-  margin: 20px auto;
-  font-family: "Comic Sans MS";
-  display: flex;
-  justify-content: center;
+  width: 100vw;
+  background-color: #fdf5df;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* background-color: #fdf5df;
+  color: #2aa198;
+  font-size: 16px; */
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 0.5fr 375px 0.5fr;
   background-color: #fdf5df;
   color: #2aa198;
   font-size: 16px;
+  grid-template-areas: "sideleft box sideright";
 }
 
 * {
@@ -18,100 +29,23 @@ h1 {
   font-weight: bold;
   font-size: 2rem;
   border-bottom: solid;
+  width: 100%;
+  text-align: center;
 }
 p {
   font-family: "Lucida Sans", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 1rem;
   margin-top: 20px;
 }
-.p {
-  margin-right: 20px;
-  color: white;
-}
 
 .box {
-  position: relative;
+  grid-area: box;
   text-decoration: none;
-  background-color: #fdf5df;
-  color: #2aa198;
-  font-size: 16px;
-  display: block;
-  height: 30em;
-  width: 20em;
-  padding: 1em;
-  justify-content: center;
 }
 
-.btn {
-  position: absolute;
-  /* right: 20px; */
-
-  border-radius: 30px;
-  color: black;
-  padding: 5px;
-  border-width: 1.5px;
-  background-color: rgb(77, 220, 20);
-  font-size: 15px;
-  margin: 10px;
+/* .sideleft {
+  grid-area: sideleft;
 }
-.btn2 {
-  position: absolute;
-  right: 20px;
-
-  border-radius: 30px;
-  color: black;
-  /* border-style: dotted; */
-  padding: 5px;
-  border-width: 1.5px;
-  background-color: rgb(77, 220, 20);
-  font-size: 15px;
-  margin: 10px;
-}
-input {
-  margin: 10px;
-}
-
-.click:hover {
-  text-shadow: 0 3px 4px 0 #fdf5df;
-  opacity: 0.7;
-}
-.click:active {
-  text-shadow: 0 3px 4px 0 #fdf5df;
-  opacity: 0.5;
-}
-.ids {
-  position: absolute;
-  right: 0%;
-}
-.eingabe {
-  margin-top: 30px;
-}
-.symb:hover {
-  text-shadow: 0 3px 4px 0 #dbedf3;
-  opacity: 0.7;
-}
-.symb:active {
-  text-shadow: 0 3px 4px 0 #dbedf3;
-  opacity: 0.5;
-}
-.textchange {
-  background: #fdf5df;
-}
-
-.link {
-  color: pink;
-}
-/* .inputstyle {
-  border-radius: 6px;
-  border: 2px solid #2aa198;
-  padding: 2px;
-}
-.inputstyle:focus {
-  outline: none;
-}
-.inputstyle:hover {
-  border: 3px solid #2aa198;
-}
-.inputstyle:active {
-  border: 3px solid #2aa198;
+.sideright {
+  grid-area: sideright;
 } */
