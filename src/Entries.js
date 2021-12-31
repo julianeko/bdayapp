@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "./App.css";
+import { Context } from "./App";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AiOutlinePlusCircle, AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
 
 function Entries({ persons, setPersons }) {
   const eingabeFeld = useRef();
@@ -12,7 +13,7 @@ function Entries({ persons, setPersons }) {
   const postcard = useRef();
   const present = useRef();
   const textarea = useRef();
-
+  const value = useContext(Context);
   const navigate = useNavigate();
 
   const [valid, setValid] = useState(true);
@@ -26,13 +27,13 @@ function Entries({ persons, setPersons }) {
   if (valid === true) {
     var icon = (
       <AiOutlineArrowRightStyle isvalid={true}>
-        <AiOutlineArrowRight />
+        <AiOutlineClose />
       </AiOutlineArrowRightStyle>
     );
   } else {
     var icon = (
       <AiOutlineArrowRightStyle isvalid={false}>
-        <AiOutlineArrowRight />
+        <AiOutlineClose />
       </AiOutlineArrowRightStyle>
     );
   }
@@ -40,13 +41,13 @@ function Entries({ persons, setPersons }) {
   if (valid2 === true) {
     var icon2 = (
       <AiOutlineArrowRightStyle isvalid={true}>
-        <AiOutlineArrowRight />
+        <AiOutlineClose />
       </AiOutlineArrowRightStyle>
     );
   } else {
     var icon2 = (
       <AiOutlineArrowRightStyle isvalid={false}>
-        <AiOutlineArrowRight />
+        <AiOutlineClose />
       </AiOutlineArrowRightStyle>
     );
   }
@@ -244,12 +245,8 @@ const CircleStyle = styled(AiOutlinePlusCircle)`
   }
 `;
 
-const AiOutlineArrowRightStyle = styled(AiOutlineArrowRight)`
+const AiOutlineArrowRightStyle = styled(AiOutlineClose)`
   /* margin-left: 95px; */
   margin-top: 2px;
-  color: ${(props) => (props.isvalid ? "#fdf5df" : "green")};
+  color: ${(props) => (props.isvalid ? "#fdf5df" : "#d33682")};
 `;
-/* const AiOutlineArrowRightStyle2 = styled(AiOutlineArrowRight)`
-  margin-left: 40px;
-  margin-top: 2px;
-`; */

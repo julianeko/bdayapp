@@ -6,7 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineSend } from "react-icons/ai";
-// var person = [{ name: "Seba", gift: "present" }];
+import ListofEntries from "./ListofEntries";
 
 function Data({ persons, setPersons }) {
   const input = useRef();
@@ -15,67 +15,66 @@ function Data({ persons, setPersons }) {
   const navigate = useNavigate();
   console.log(persons);
 
-  function deleteItem(idtobedeleted) {
-    var filtered = persons.filter((element) => element.id !== idtobedeleted);
-    // localStorage.setItem("todos", JSON.stringify(filtered));
-    console.log(filtered);
-    setPersons(filtered);
-  }
+  // function deleteItem(idtobedeleted) {
+  //   var filtered = persons.filter((element) => element.id !== idtobedeleted);
+  //   // localStorage.setItem("todos", JSON.stringify(filtered));
+  //   console.log(filtered);
+  //   setPersons(filtered);
+  // }
 
-  let oneperson = persons.map((element) => (
-    <div>
-      <EntryBoxStyle key={element.id}>
-        <BinStyle>
-          <div>
-            <LinkStyle to={"/change/" + element.id}> {element.name}</LinkStyle>
-            <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
-          </div>
-        </BinStyle>
-        <div>{element.date}</div>
-        <div>{element.present}</div>
-        <div>{element.postcard}</div>
-        <div>{element.message}</div>
-        <div>{element.text}</div>
-      </EntryBoxStyle>
-    </div>
-  ));
-  console.log(oneperson);
-  console.log(persons);
+  // let oneperson = persons.map((element) => (
+  //   <div>
+  //     <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
+  //       <BinStyle>
+  //         <div>
+  //           <LinkStyle to={"/change/" + element.id}> {element.name}</LinkStyle>
+  //           <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
+  //         </div>
+  //       </BinStyle>
+  //       <div>{element.date}</div>
+  //       <div>{element.present}</div>
+  //       <div>{element.postcard}</div>
+  //       <div>{element.message}</div>
+  //       <div>{element.text}</div>
+  //     </EntryBoxStyle>
+  //   </div>
+  // ));
+  // console.log(oneperson);
+  // console.log(persons);
+  // console.log(persons.name);
 
-  var re = new RegExp(search, "gim");
-
-  var objectFound = persons.filter((element) => {
-    var help = re.test(element.name);
-    return help;
+  persons.sort(function (a, b) {
+    return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
   });
-  console.log(objectFound);
 
-  let newArray = objectFound.map((element) => (
-    <div>
-      <EntryBoxStyle key={element.id}>
-        <BinStyle>
-          <div>
-            <LinkStyle className="link" to={"/change/" + element.id}>
-              {element.name}
-            </LinkStyle>
-          </div>
-          <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
-        </BinStyle>
-        <div>{element.date}</div>
-        <div>{element.present}</div>
-        <div>{element.postcard}</div>
-        <div>{element.message}</div>
-        <div>{element.text}</div>
-      </EntryBoxStyle>
-    </div>
-  ));
-  console.log(newArray);
+  // let newArray = objectFound.map((element) => (
+  //   <div>
+  //     <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
+  //       <BinStyle>
+  //         <div>
+  //           <LinkStyle className="link" to={"/change/" + element.id}>
+  //             {element.name}
+  //           </LinkStyle>
+  //         </div>
+  //         <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
+  //       </BinStyle>
+  //       <div>{element.date}</div>
+  //       <div>{element.present}</div>
+  //       <div>{element.postcard}</div>
+  //       <div>{element.message}</div>
+  //       <div>{element.text}</div>
+  //     </EntryBoxStyle>
+  //   </div>
+  // ));
 
-  let result = oneperson;
+  let result = persons;
   if (search === undefined) {
-    result = oneperson;
+    result = persons;
   } else {
-    result = newArray;
+    var re = new RegExp(search, "gim");
+
+    var objectFound = persons.filter((element) => re.test(element.name));
+    result = objectFound;
   }
 
   function onClick() {
@@ -103,7 +102,9 @@ function Data({ persons, setPersons }) {
           <AiOutlineSendStyle onClick={onClick} />
         </RowStyle>
 
-        <div>{result}</div>
+        <div>
+          <ListofEntries personslist={result} />
+        </div>
       </div>
     </div>
   );

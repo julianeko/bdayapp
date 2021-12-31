@@ -4,6 +4,7 @@ import React, { useState, createContext, useEffect } from "react";
 import Data from "./Data";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Change from "./Change";
+import Main from "./Main";
 
 export const Context = createContext();
 
@@ -44,6 +45,15 @@ function App() {
               path="/change/:change"
               element={<Change persons={persons} setPersons={setPersons} />}
             />
+            <Route
+              path="/main/"
+              element={<Main persons={persons} setPersons={setPersons} />}
+            />
+
+            {/* <Route
+              path="/data/:changedentry/:changedentry2"
+              element={<Data persons={persons} setPersons={setPersons} />}
+            /> */}
           </Routes>
         </BrowserRouter>
       </Context.Provider>
