@@ -1,8 +1,6 @@
-
 function distanceToBirthday(date) {
-
   const currDate = new Date();
-currDate.setHours(0, 0, 0, 0);
+  currDate.setHours(0, 0, 0, 0);
   let currYear = currDate.getFullYear();
 
   const offset = new Date(currDate);

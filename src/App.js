@@ -49,11 +49,6 @@ function App() {
               path="/main/"
               element={<Main persons={persons} setPersons={setPersons} />}
             />
-
-            {/* <Route
-              path="/data/:changedentry/:changedentry2"
-              element={<Data persons={persons} setPersons={setPersons} />}
-            /> */}
           </Routes>
         </BrowserRouter>
       </Context.Provider>

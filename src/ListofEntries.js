@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Context } from "./App";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { IoMdTrash } from "react-icons/io";
-import Countdown from "react-countdown";
-import { MdNorthWest } from "react-icons/md";
+import distanceToBirthday from "./distanceToBirthday";
+// import { pathExists } from "path-exists";
 
-function ListofEntries({ personslist, distanceToBirthday }) {
+function ListofEntries({ personslist, showcountdown }) {
   const { persons, setPersons } = useContext(Context);
 
   function deleteItem(idtobedeleted) {
@@ -17,26 +17,33 @@ function ListofEntries({ personslist, distanceToBirthday }) {
   }
   console.log(personslist);
 
-  let view = personslist.map((element) => (
-    <div>
-      <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
-        <BinStyle>
-          <div>
-            <LinkStyle to={"/change/" + element.id}> {element.name}</LinkStyle>
-            <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
-          </div>
-        </BinStyle>
-        <div>{element.date}</div>
-        <div>{element.present}</div>
-        <div>{element.postcard}</div>
-        <div>{element.message}</div>
-        <div>{element.text}</div>
-        <div>
-          <Countdown date={distanceToBirthday(element.date)}></Countdown>
-        </div>
-      </EntryBoxStyle>
-    </div>
-  ));
+  let view = personslist.map((element) => {
+    if (showcountdown === true) {
+      const msToBday = distanceToBirthday(element.date);
+      const daysToBday = Math.round(msToBday / (60 * 60 * 24 * 1000));
+      var countdown = <div>Days to go: {daysToBday}</div>;
+    } else {
+      var countdown = undefined;
+    }
+    return (
+      <div>
+        <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
+          <BinStyle>
+            <div>
+              <LinkStyle to={"/change/" + element.id}>{element.name}</LinkStyle>
+              <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
+            </div>
+          </BinStyle>
+          <div>{element.date}</div>
+          <div>{element.present}</div>
+          <div>{element.postcard}</div>
+          <div>{element.message}</div>
+          <div>{element.text}</div>
+          {countdown}
+        </EntryBoxStyle>
+      </div>
+    );
+  });
 
   return <div>{view}</div>;
 }

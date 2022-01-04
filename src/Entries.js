@@ -1,10 +1,11 @@
 import React, { useRef, useState, useContext } from "react";
 import "./App.css";
-import { Context } from "./App";
+import { inputContext } from "./BirthdayInput";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
+import BirthdayInput from "./BirthdayInput";
 
 function Entries({ persons, setPersons }) {
   const eingabeFeld = useRef();
@@ -13,17 +14,18 @@ function Entries({ persons, setPersons }) {
   const postcard = useRef();
   const present = useRef();
   const textarea = useRef();
-  const value = useContext(Context);
+
   const navigate = useNavigate();
 
   const [valid, setValid] = useState(true);
   const [valid2, setValid2] = useState(true);
-  // let icon = (
-  //   <AiOutlineArrowRightStyle>
-  //     <AiOutlineArrowRight />
-  //   </AiOutlineArrowRightStyle>
-  // );
+  const [day, setDay] = useState();
+  const [month, setMonth] = useState();
+  const [year, setYear] = useState();
 
+  const date = `${day}.${month}.${year}`;
+  console.log(date);
+  console.log(day);
   if (valid === true) {
     var icon = (
       <AiOutlineArrowRightStyle isvalid={true}>
@@ -53,19 +55,13 @@ function Entries({ persons, setPersons }) {
   }
 
   function onClickTest() {
-    if (eingabeFeld.current.value === "" && eingabeFeld2.current.value === "") {
+    if ((eingabeFeld.current.value === "" && day <= 0) || month <= 0) {
       setValid(false);
       setValid2(false);
-    } else if (
-      eingabeFeld.current.value !== "" &&
-      eingabeFeld2.current.value === ""
-    ) {
+    } else if ((eingabeFeld.current.value !== "" && day <= 0) || month <= 0) {
       setValid(true);
       setValid2(false);
-    } else if (
-      eingabeFeld2.current.value !== "" &&
-      eingabeFeld.current.value === ""
-    ) {
+    } else if (day > 0 && month > 0 && eingabeFeld.current.value === "") {
       setValid(false);
       setValid2(true);
     } else {
@@ -73,7 +69,7 @@ function Entries({ persons, setPersons }) {
         {
           id: uuidv4(),
           name: eingabeFeld.current.value,
-          date: eingabeFeld2.current.value,
+          date: date,
           present: present.current.checked ? present.current.value : "",
           postcard: postcard.current.checked ? postcard.current.value : "",
           message: message.current.checked ? message.current.value : "",
@@ -83,7 +79,6 @@ function Entries({ persons, setPersons }) {
       ]);
 
       eingabeFeld.current.value = "";
-      eingabeFeld2.current.value = "";
       present.current.checked = "";
       postcard.current.checked = "";
       message.current.checked = "";
@@ -107,7 +102,7 @@ function Entries({ persons, setPersons }) {
           ></InputStyle>
           {icon}
         </FlexStyle>
-        <FlexStyle>
+        {/* <FlexStyle>
           <LabelStyle>Date:</LabelStyle>
           <InputStyle
             className="inputstyle"
@@ -116,7 +111,20 @@ function Entries({ persons, setPersons }) {
             placeholder="Enter Birthday-Date"
           ></InputStyle>
           {icon2}
-        </FlexStyle>
+        </FlexStyle> */}
+        <RowStyle>
+          <NewStyle
+            day={day}
+            month={month}
+            year={year}
+            icon2={icon2}
+            onChange={(d, m, y) => {
+              setDay(d);
+              setMonth(m);
+              setYear(y);
+            }}
+          />
+        </RowStyle>
         <FlexStyle>
           <LabelStyle>Present:</LabelStyle>
           <InputStyleBox
@@ -184,6 +192,24 @@ const InputStyle = styled.input`
     border: 3px solid #d33682;
   }
 `;
+const NewStyle = styled(BirthdayInput)`
+  /* position: absolute; */
+  /* right: 10px;
+  border-radius: 6px;
+  border: 2px solid #2aa198;
+  padding: 2px;
+  width: 150px; */
+  /* 
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    border: 3px solid #d33682;
+  }
+  &:active {
+    border: 3px solid #d33682;
+  } */
+`;
 
 const InputStyleText = styled.textarea`
   /* position: absolute; */
@@ -223,6 +249,11 @@ const LabelStyle = styled.span`
 const FlexStyle = styled.div`
   width: 100%;
   margin-top: 10px;
+`;
+const RowStyle = styled.div`
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
 `;
 
 const FlexStyle2 = styled.div`
