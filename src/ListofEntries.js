@@ -4,11 +4,10 @@ import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { IoMdTrash } from "react-icons/io";
 import distanceToBirthday from "./distanceToBirthday";
-// import { pathExists } from "path-exists";
 
 function ListofEntries({ personslist, showcountdown }) {
   const { persons, setPersons } = useContext(Context);
-
+  const date = persons.day;
   function deleteItem(idtobedeleted) {
     var filtered = persons.filter((element) => element.id !== idtobedeleted);
     // localStorage.setItem("todos", JSON.stringify(filtered));
@@ -34,7 +33,9 @@ function ListofEntries({ personslist, showcountdown }) {
               <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
             </div>
           </BinStyle>
-          <div>{element.date}</div>
+          <div>
+            {element.day}.{element.month}.{element.year}
+          </div>
           <div>{element.present}</div>
           <div>{element.postcard}</div>
           <div>{element.message}</div>

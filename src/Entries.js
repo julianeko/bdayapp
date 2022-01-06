@@ -9,7 +9,7 @@ import BirthdayInput from "./BirthdayInput";
 
 function Entries({ persons, setPersons }) {
   const eingabeFeld = useRef();
-  const eingabeFeld2 = useRef();
+  // const eingabeFeld2 = useRef();
   const message = useRef();
   const postcard = useRef();
   const present = useRef();
@@ -23,8 +23,8 @@ function Entries({ persons, setPersons }) {
   const [month, setMonth] = useState();
   const [year, setYear] = useState();
 
-  const date = `${day}.${month}.${year}`;
-  console.log(date);
+  // const date = `${day}.${month}.${year}`;
+  // console.log(date);
   console.log(day);
   if (valid === true) {
     var icon = (
@@ -69,7 +69,9 @@ function Entries({ persons, setPersons }) {
         {
           id: uuidv4(),
           name: eingabeFeld.current.value,
-          date: date,
+          day: day,
+          month: month,
+          year: year,
           present: present.current.checked ? present.current.value : "",
           postcard: postcard.current.checked ? postcard.current.value : "",
           message: message.current.checked ? message.current.value : "",
@@ -87,6 +89,7 @@ function Entries({ persons, setPersons }) {
       navigate("/data/");
     }
   }
+  console.log(persons);
 
   return (
     <div className="container">

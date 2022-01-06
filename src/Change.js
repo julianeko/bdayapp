@@ -4,15 +4,16 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { Context } from "./App";
 import styled from "styled-components";
 import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
+import BirthdayInput from "./BirthdayInput";
 
 function Change({ persons, setPersons }) {
   const { change } = useParams();
   const { search } = useParams();
   const navigate = useNavigate();
-  const value = useContext(Context);
+  // const value = useContext(Context);
   const textarea = useRef();
   const textarea2 = useRef();
-  const datum = useRef();
+  // const datum = useRef();
   const nachricht = useRef();
   const postkarte = useRef();
   const geschenk = useRef();
@@ -22,7 +23,10 @@ function Change({ persons, setPersons }) {
   console.log(changePerson.name);
 
   const [name, setName] = useState(changePerson.name);
-  const [date, setDate] = useState(changePerson.date);
+  // const [date, setDate] = useState(changePerson.date);
+  const [day, setDay] = useState(changePerson.day);
+  const [month, setMonth] = useState(changePerson.month);
+  const [year, setYear] = useState(changePerson.year);
   const [present, setPresent] = useState(changePerson.present);
   const [postcard, setPostcard] = useState(changePerson.postcard);
   const [message, setMessage] = useState(changePerson.message);
@@ -35,9 +39,15 @@ function Change({ persons, setPersons }) {
     setName(event.target.value);
     console.log(event.target.value);
   }
-  function onChangeDate(event) {
-    setDate(event.target.value);
-  }
+  // function onChangeDate(event) {
+  // setDate(event.target.value);
+  // }
+  // function onChange(day, month, year) {
+  // setDay(day.target.value);
+  // }
+  // function onChangeMonth(event) {
+  //   setMonth(event.target.value);
+  // }
   function onChangePresent(event) {
     setPresent(event.target.checked ? event.target.value : "");
   }
@@ -79,34 +89,33 @@ function Change({ persons, setPersons }) {
   }
 
   function changeEntry() {
-    if (name === "" && date === "") {
+    if ((name === "" && day <= 0) || month <= 0) {
       setValid(false);
       setValid2(false);
-    } else if (name !== "" && date === "") {
+    } else if ((name !== "" && day <= 0) || month <= 0) {
       setValid(true);
       setValid2(false);
-    } else if (date !== "" && name === "") {
+    } else if (day > 0 && month > 0 && name === "") {
       setValid(false);
       setValid2(true);
-    } else if (
-      (name != changePerson.name && name != "") ||
-      (date != changePerson.date && date != "") ||
-      present != changePerson.present ||
-      postcard != changePerson.postcard ||
-      message != changePerson.message ||
-      text != changePerson.text
-    ) {
+    } else {
+      //   (name != changePerson.name && name != "") ||
+      //   (day != changePerson.day && day != "") ||
+      //   (month != changePerson.month && month != "")
+      //   present != changePerson.present ||
+      //   postcard != changePerson.postcard ||
+      //   message != changePerson.message ||
+      //   text != changePerson.text
+      // ) {
       console.log("Baeh");
       changePerson.name = name;
-
-      changePerson.date = date;
-
+      // changePerson.date = date;
+      changePerson.day = day;
+      changePerson.month = month;
+      changePerson.year = year;
       changePerson.present = present;
-
       changePerson.postcard = postcard;
-
       changePerson.message = message;
-
       changePerson.text = text;
       setPersons([...persons]);
 
@@ -139,16 +148,27 @@ function Change({ persons, setPersons }) {
           ></InputStyle>
           {icon}
         </FlexStyle>
+        <BirthdayInput
+          day={day}
+          month={month}
+          year={year}
+          icon2={icon2}
+          onChange={(d, m, y) => {
+            setDay(d);
+            setMonth(m);
+            setYear(y);
+          }}
+        />
         <FlexStyle>
-          <LabelStyle>Date:</LabelStyle>
+          {/* <LabelStyle>Date:</LabelStyle>
           <InputStyle
             ref={datum}
             type="date"
             placeholder="Enter Birthday-Date"
             value={date}
-            onChange={onChangeDate}
+            // onChange={onChangeDate}
           ></InputStyle>
-          {icon2}
+          {icon2} */}
         </FlexStyle>
         <FlexStyle>
           <LabelStyle>Present:</LabelStyle>
