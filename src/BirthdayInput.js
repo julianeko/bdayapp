@@ -7,7 +7,11 @@ function BirthdayInput({ day, month, year, onChange, icon2 }) {
   const [imonth, setIMonth] = useState(month || new Date().getMonth() + 1);
   const [iyear, setIYear] = useState(year || new Date().getFullYear());
   useEffect(() => {
-    onChange(iday, imonth, iyear);
+    if (withyear === true) {
+      onChange(iday, imonth, iyear);
+    } else {
+      onChange(iday, imonth, undefined);
+    }
   }, [iday, imonth, iyear]);
 
   function changeToWithYear(event) {

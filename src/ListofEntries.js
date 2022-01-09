@@ -5,9 +5,9 @@ import { Link, useParams } from "react-router-dom";
 import { IoMdTrash } from "react-icons/io";
 import distanceToBirthday from "./distanceToBirthday";
 
-function ListofEntries({ personslist, showcountdown }) {
+function ListofEntries({ personslist, showcountdown, year }) {
   const { persons, setPersons } = useContext(Context);
-  const date = persons.day;
+
   function deleteItem(idtobedeleted) {
     var filtered = persons.filter((element) => element.id !== idtobedeleted);
     // localStorage.setItem("todos", JSON.stringify(filtered));
@@ -18,12 +18,19 @@ function ListofEntries({ personslist, showcountdown }) {
 
   let view = personslist.map((element) => {
     if (showcountdown === true) {
-      const msToBday = distanceToBirthday(element.date);
+      const msToBday = distanceToBirthday(
+        element.day,
+        element.month,
+        element.year
+      );
       const daysToBday = Math.round(msToBday / (60 * 60 * 24 * 1000));
       var countdown = <div>Days to go: {daysToBday}</div>;
+      console.log(msToBday);
     } else {
       var countdown = undefined;
     }
+    console.log(Number.isInteger(element.year));
+
     return (
       <div>
         <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
@@ -46,7 +53,11 @@ function ListofEntries({ personslist, showcountdown }) {
     );
   });
 
-  return <div>{view}</div>;
+  return (
+    <div>
+      <div>{view}</div>
+    </div>
+  );
 }
 
 export default ListofEntries;

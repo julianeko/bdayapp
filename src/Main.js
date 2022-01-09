@@ -1,14 +1,7 @@
 import React, { useRef } from "react";
 import ListofEntries from "./ListofEntries";
 import "./App.css";
-import { MdEmojiPeople, MdFrontHand } from "react-icons/md";
-import { IoMdTrash } from "react-icons/io";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { AiOutlineSend } from "react-icons/ai";
 import distanceToBirthday from "./distanceToBirthday";
-
 
 function Main({ persons, setPersons }) {
   console.log(persons);
@@ -18,26 +11,33 @@ function Main({ persons, setPersons }) {
   const currDate = new Date();
 
   personscopy.sort(function (a, b) {
-    return distanceToBirthday(a.date) - distanceToBirthday(b.date);
+    return (
+      distanceToBirthday(a.day, a.month, a.year) -
+      distanceToBirthday(b.day, b.month, b.year)
+    );
   });
   console.log(personscopy);
 
   var find = personscopy.filter(
     (element) =>
-      (new Date(element.date).getMonth() === currDate.getMonth() &&
-        new Date(element.date).getDate() >= currDate.getDate()) ||
-      new Date(element.date).getMonth() === currDate.getMonth() + 1 ||
-      new Date(element.date).getMonth() === currDate.getMonth() - 11
+      (element.month - 1 === currDate.getMonth() &&
+        element.day >= currDate.getDate()) ||
+      element.month - 1 === currDate.getMonth() + 1 ||
+      element.month - 1 === currDate.getMonth() - 11
   );
 
-  console.log(find);
+  let newarr = find.length;
+  let ausschnitt = personscopy.splice(newarr);
+
+  console.log(newarr);
+  console.log(ausschnitt);
 
   return (
     <div className="container">
       <div className="box">
         <h1>Upcoming Birthdays</h1>
-        <ListofEntries personslist={find} showcountdown={true} />
-        <ListofEntries personslist={personscopy} showcountdown={false} />
+        <ListofEntries personslist={personscopy} showcountdown={true} />
+        <ListofEntries personslist={ausschnitt} showcountdown={false} />
       </div>
     </div>
   );

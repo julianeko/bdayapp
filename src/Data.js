@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import "./App.css";
-import { MdEmojiPeople } from "react-icons/md";
 import { IoMdTrash } from "react-icons/io";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -15,57 +14,11 @@ function Data({ persons, setPersons }) {
   const navigate = useNavigate();
   console.log(persons);
 
-  // function deleteItem(idtobedeleted) {
-  //   var filtered = persons.filter((element) => element.id !== idtobedeleted);
-  //   // localStorage.setItem("todos", JSON.stringify(filtered));
-  //   console.log(filtered);
-  //   setPersons(filtered);
-  // }
-
-  // let oneperson = persons.map((element) => (
-  //   <div>
-  //     <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
-  //       <BinStyle>
-  //         <div>
-  //           <LinkStyle to={"/change/" + element.id}> {element.name}</LinkStyle>
-  //           <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
-  //         </div>
-  //       </BinStyle>
-  //       <div>{element.date}</div>
-  //       <div>{element.present}</div>
-  //       <div>{element.postcard}</div>
-  //       <div>{element.message}</div>
-  //       <div>{element.text}</div>
-  //     </EntryBoxStyle>
-  //   </div>
-  // ));
-  // console.log(oneperson);
-  // console.log(persons);
-  // console.log(persons.name);
 
   persons.sort(function (a, b) {
     return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
   });
 
-  // let newArray = objectFound.map((element) => (
-  //   <div>
-  //     <EntryBoxStyle key={element.id} deleteItem={deleteItem}>
-  //       <BinStyle>
-  //         <div>
-  //           <LinkStyle className="link" to={"/change/" + element.id}>
-  //             {element.name}
-  //           </LinkStyle>
-  //         </div>
-  //         <IoMdTrashStyle onClick={() => deleteItem(element.id)} />
-  //       </BinStyle>
-  //       <div>{element.date}</div>
-  //       <div>{element.present}</div>
-  //       <div>{element.postcard}</div>
-  //       <div>{element.message}</div>
-  //       <div>{element.text}</div>
-  //     </EntryBoxStyle>
-  //   </div>
-  // ));
 
   let result = persons;
   if (search === undefined) {

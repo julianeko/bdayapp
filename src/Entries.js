@@ -105,16 +105,7 @@ function Entries({ persons, setPersons }) {
           ></InputStyle>
           {icon}
         </FlexStyle>
-        {/* <FlexStyle>
-          <LabelStyle>Date:</LabelStyle>
-          <InputStyle
-            className="inputstyle"
-            ref={eingabeFeld2}
-            type="date"
-            placeholder="Enter Birthday-Date"
-          ></InputStyle>
-          {icon2}
-        </FlexStyle> */}
+
         <RowStyle>
           <NewStyle
             day={day}
