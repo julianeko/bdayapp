@@ -4,7 +4,13 @@ import { inputContext } from "./BirthdayInput";
 import { v4 as uuidv4 } from "uuid";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlinePlusCircle,
+  AiOutlineClose,
+  AiOutlineHome,
+  AiOutlineFileSearch,
+  AiOutlineForm,
+} from "react-icons/ai";
 import BirthdayInput from "./BirthdayInput";
 
 function Entries({ persons, setPersons }) {
@@ -23,6 +29,15 @@ function Entries({ persons, setPersons }) {
   const [month, setMonth] = useState();
   const [year, setYear] = useState();
 
+  function onClickHome() {
+    navigate("/");
+  }
+  function onClickForm() {
+    navigate("/entries/");
+  }
+  function onClickSortier() {
+    navigate("/data/");
+  }
   // const date = `${day}.${month}.${year}`;
   // console.log(date);
   console.log(day);
@@ -94,7 +109,7 @@ function Entries({ persons, setPersons }) {
   return (
     <div className="container">
       <div className="box">
-        <h1>By-Happy</h1>
+        <h1>Enter Dates</h1>
         <FlexStyle>
           <LabelStyle> Name:</LabelStyle>
           <InputStyle
@@ -161,12 +176,57 @@ function Entries({ persons, setPersons }) {
         <FlexStyle2>
           <CircleStyle onClick={onClickTest} />
         </FlexStyle2>
+        <LinkIconStyles>
+          <LinkStyle onClick={onClickHome} />
+          <LinkStyle2 onClick={onClickForm} />
+          <LinkStyle3 onClick={onClickSortier} />
+        </LinkIconStyles>
       </div>
     </div>
   );
 }
 
 export default Entries;
+
+const LinkIconStyles = styled.div`
+  display: flex;
+`;
+const LinkStyle = styled(AiOutlineHome)`
+  color: #2aa198;
+  font-size: 40px;
+  display: inline-block;
+  margin-left: 10px;
+  &:hover {
+    color: #d33682;
+  }
+  &:active {
+    color: #d33682;
+  }
+`;
+const LinkStyle2 = styled(AiOutlineForm)`
+  color: #d33682;
+  font-size: 40px;
+  display: inline-block;
+  /* margin: 20px; */
+  &:hover {
+    color: #d33682;
+  }
+  &:active {
+    color: #d33682;
+  }
+`;
+const LinkStyle3 = styled(AiOutlineFileSearch)`
+  color: #2aa198;
+  font-size: 40px;
+  display: inline-block;
+  /* margin: 20px; */
+  &:hover {
+    color: #d33682;
+  }
+  &:active {
+    color: #d33682;
+  }
+`;
 
 const InputStyle = styled.input`
   /* position: absolute; */
@@ -180,10 +240,10 @@ const InputStyle = styled.input`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 const NewStyle = styled(BirthdayInput)`
@@ -217,10 +277,10 @@ const InputStyleText = styled.textarea`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 const InputStyleBox = styled.input`
@@ -258,12 +318,11 @@ const FlexStyle2 = styled.div`
 
 const CircleStyle = styled(AiOutlinePlusCircle)`
   color: #d33682;
-  font-size: 60px;
+  font-size: 40px;
   display: inline-block;
   /* margin: 20px; */
   &:hover {
     color: #2aa198;
-    font-size: 65px;
   }
   &:active {
     color: #2aa198;

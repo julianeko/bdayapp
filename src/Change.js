@@ -3,7 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Context } from "./App";
 import styled from "styled-components";
-import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlinePlusCircle,
+  AiOutlineClose,
+  AiOutlineSend,
+  AiOutlineHome,
+  AiOutlineFileSearch,
+  AiOutlineForm,
+} from "react-icons/ai";
 import BirthdayInput from "./BirthdayInput";
 
 function Change({ persons, setPersons }) {
@@ -17,7 +24,15 @@ function Change({ persons, setPersons }) {
   const nachricht = useRef();
   const postkarte = useRef();
   const geschenk = useRef();
-
+  function onClickHome() {
+    navigate("/");
+  }
+  function onClickForm() {
+    navigate("/entries/");
+  }
+  function onClickSortier() {
+    navigate("/data/");
+  }
   var changePerson = persons.find((element) => element.id === change);
   console.log(changePerson);
   console.log(changePerson.name);
@@ -136,7 +151,7 @@ function Change({ persons, setPersons }) {
   return (
     <div className="container">
       <div className="box">
-        <h1>Change me</h1>
+        <h1>Change Dates</h1>
         <FlexStyle>
           <LabelStyle> Name:</LabelStyle>
           <InputStyle
@@ -219,13 +234,56 @@ function Change({ persons, setPersons }) {
         <FlexStyle2>
           <CircleStyle className="btn" onClick={changeEntry} />
         </FlexStyle2>
+        <LinkIconStyles>
+          <LinkStyle onClick={onClickHome} />
+          <LinkStyle2 onClick={onClickForm} />
+          <LinkStyle3 onClick={onClickSortier} />
+        </LinkIconStyles>
       </div>
     </div>
   );
 }
 
 export default Change;
-
+const LinkIconStyles = styled.div`
+  display: flex;
+`;
+const LinkStyle = styled(AiOutlineHome)`
+  color: #2aa198;
+  font-size: 40px;
+  display: inline-block;
+  margin-left: 10px;
+  &:hover {
+    color: #d33682;
+  }
+  &:active {
+    color: #d33682;
+  }
+`;
+const LinkStyle2 = styled(AiOutlineForm)`
+  color: #2aa198;
+  font-size: 40px;
+  display: inline-block;
+  /* margin: 20px; */
+  &:hover {
+    color: #d33682;
+  }
+  &:active {
+    color: #d33682;
+  }
+`;
+const LinkStyle3 = styled(AiOutlineFileSearch)`
+  color: #2aa198;
+  font-size: 40px;
+  display: inline-block;
+  /* margin: 20px; */
+  &:hover {
+    color: #d33682;
+  }
+  &:active {
+    color: #d33682;
+  }
+`;
 const InputStyle = styled.input`
   /* position: absolute; */
   right: 10px;
@@ -238,10 +296,10 @@ const InputStyle = styled.input`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 
@@ -264,10 +322,10 @@ const InputStyleText = styled.textarea`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 const InputStyleBox = styled.input`
@@ -299,12 +357,11 @@ const FlexStyle2 = styled.div`
 
 const CircleStyle = styled(AiOutlinePlusCircle)`
   color: #d33682;
-  font-size: 60px;
+  font-size: 40px;
   display: inline-block;
   /* margin: 20px; */
   &:hover {
     color: #2aa198;
-    font-size: 65px;
   }
   &:active {
     color: #2aa198;

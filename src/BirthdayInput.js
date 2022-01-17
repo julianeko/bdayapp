@@ -114,10 +114,10 @@ const InputStylecheckb = styled.input`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 
@@ -134,10 +134,10 @@ const InputStyle = styled.input`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 const InputStyle1 = styled.input`
@@ -153,10 +153,10 @@ const InputStyle1 = styled.input`
     outline: none;
   }
   &:hover {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
   &:active {
-    border: 3px solid #d33682;
+    border: 2px solid #d33682;
   }
 `;
 const FlexStyle = styled.div`
@@ -172,15 +172,18 @@ const LabelStyle = styled.span`
 
 const FlexStyle2 = styled.div`
   margin-top: 10px;
-  text-align: center;
-  position: relative;
-  left: 69px;
-  right: 0;
+  margin-left: 150px;
+  /* text-align: right;
+  right: 10px; */
+  /* left: 69px;
+  right: 0; */
 `;
 const FlexStyle3 = styled.div`
   margin-top: 10px;
-  text-align: center;
-  position: relative;
-  left: 100px;
-  right: 0;
+  margin-left: 150px;
+  /* text-align: right;
+  right: 10px; */
+
+  /* left: 100.5px;
+  right: 0; */
 `;

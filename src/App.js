@@ -29,7 +29,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route
-              path="/"
+              path="/entries/"
               element={<Entries persons={persons} setPersons={setPersons} />}
             />
             <Route
@@ -46,7 +46,7 @@ function App() {
               element={<Change persons={persons} setPersons={setPersons} />}
             />
             <Route
-              path="/main/"
+              path="/"
               element={<Main persons={persons} setPersons={setPersons} />}
             />
           </Routes>
