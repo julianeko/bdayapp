@@ -86,7 +86,7 @@ const LinkIconStyles = styled.div`
   display: flex;
 `;
 const LinkStyle = styled(AiOutlineHome)`
-  color: #d33682;
+  color: #2aa198;
   font-size: 40px;
   display: inline-block;
   margin-left: 10px;
