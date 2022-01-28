@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "./App";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoMdTrash } from "react-icons/io";
 import distanceToBirthday from "./distanceToBirthday";
 
@@ -27,7 +27,7 @@ function ListofEntries({ personslist, showcountdown, year }) {
       var countdown = <div>Days to go: {daysToBday}</div>;
       console.log(msToBday);
     } else {
-      var countdown = undefined;
+      countdown = undefined;
     }
     console.log(Number.isInteger(element.year));
 

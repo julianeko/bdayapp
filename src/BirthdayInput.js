@@ -12,7 +12,7 @@ function BirthdayInput({ day, month, year, onChange, icon2 }) {
     } else {
       onChange(iday, imonth, undefined);
     }
-  }, [iday, imonth, iyear]);
+  }, [iday, imonth, iyear, withyear, onChange]);
 
   function changeToWithYear(event) {
     setWithyear(event.target.checked);

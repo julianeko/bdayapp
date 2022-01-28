@@ -1,3 +1,7 @@
+#Privacy
+
+As this App has no backend yet, all data will remain in localstorage on the used device. No one else has access to the data.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,12 +1,11 @@
-import React, { useRef, useState, useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { Context } from "./App";
+import React, { useRef, useState } from "react";
+
+import { useParams, useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 import {
   AiOutlinePlusCircle,
   AiOutlineClose,
-  AiOutlineSend,
   AiOutlineHome,
   AiOutlineFileSearch,
   AiOutlineForm,
@@ -15,7 +14,7 @@ import BirthdayInput from "./BirthdayInput";
 
 function Change({ persons, setPersons }) {
   const { change } = useParams();
-  const { search } = useParams();
+
   const navigate = useNavigate();
   // const value = useContext(Context);
   const textarea = useRef();
@@ -82,7 +81,7 @@ function Change({ persons, setPersons }) {
       </AiOutlineArrowRightStyle>
     );
   } else {
-    var icon = (
+    icon = (
       <AiOutlineArrowRightStyle isvalid={false}>
         <AiOutlineClose />
       </AiOutlineArrowRightStyle>
@@ -96,7 +95,7 @@ function Change({ persons, setPersons }) {
       </AiOutlineArrowRightStyle>
     );
   } else {
-    var icon2 = (
+    icon2 = (
       <AiOutlineArrowRightStyle isvalid={false}>
         <AiOutlineClose />
       </AiOutlineArrowRightStyle>

@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import "./App.css";
-import { IoMdTrash } from "react-icons/io";
+
 import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 import styled from "styled-components";
 import {
   AiOutlineSend,
@@ -178,9 +178,7 @@ const RowStyle = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const BinStyle = styled.div`
-  position: relative;
-`;
+
 
 const AiOutlineSendStyle = styled(AiOutlineSend)`
   font-size: 20px;

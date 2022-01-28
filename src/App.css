@@ -43,6 +43,24 @@ p {
   text-decoration: none;
 }
 
+a:link {
+  text-decoration: none;
+  text-decoration: underline;
+  color: #2aa198;
+}
+a:visited {
+  text-decoration: none;
+  color: #2aa198;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+  color: #2aa198;
+}
+a:active {
+  text-decoration: none;
+  color: #2aa198;
+}
 /* .sideleft {
   grid-area: sideleft;
 }

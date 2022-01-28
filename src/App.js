@@ -5,6 +5,7 @@ import Data from "./Data";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Change from "./Change";
 import Main from "./Main";
+import PrivacyPolice from "./PrivacyPolice";
 
 export const Context = createContext();
 
@@ -49,6 +50,7 @@ function App() {
               path="/"
               element={<Main persons={persons} setPersons={setPersons} />}
             />
+            <Route path="/pp/" element={<PrivacyPolice />} />
           </Routes>
         </BrowserRouter>
       </Context.Provider>

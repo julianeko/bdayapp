@@ -1,8 +1,7 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
-import { inputContext } from "./BirthdayInput";
 import { v4 as uuidv4 } from "uuid";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   AiOutlinePlusCircle,
@@ -48,7 +47,7 @@ function Entries({ persons, setPersons }) {
       </AiOutlineArrowRightStyle>
     );
   } else {
-    var icon = (
+    icon = (
       <AiOutlineArrowRightStyle isvalid={false}>
         <AiOutlineClose />
       </AiOutlineArrowRightStyle>
@@ -62,7 +61,7 @@ function Entries({ persons, setPersons }) {
       </AiOutlineArrowRightStyle>
     );
   } else {
-    var icon2 = (
+    icon2 = (
       <AiOutlineArrowRightStyle isvalid={false}>
         <AiOutlineClose />
       </AiOutlineArrowRightStyle>
