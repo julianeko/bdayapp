@@ -24,8 +24,8 @@ function PrivacyPolice() {
           As this app has no backend yet, all data will remain in the
           localstorage of the used device. No one else has access to the data.
           If you access the app via{" "}
-          <a href="https://www.netlify.com/"> netlifly </a> it might be
-          possible, that netlifly collects additional data. Please check out the{" "}
+          <a href="https://www.netlify.com/">netlify</a> it might be possible,
+          that netlify collects additional data. Please check out the{" "}
           <a href="https://www.netlify.com/privacy">privacy police</a> for
           further information.
         </PPStyle>
