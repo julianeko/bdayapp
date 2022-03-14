@@ -179,7 +179,6 @@ const RowStyle = styled.div`
   flex-direction: row;
 `;
 
-
 const AiOutlineSendStyle = styled(AiOutlineSend)`
   font-size: 20px;
   margin-right: 10px;

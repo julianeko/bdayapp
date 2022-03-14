@@ -1,4 +1,4 @@
-#Privacy
+# Privacy
 
 As this App has no backend yet, all data will remain in localstorage on the used device. No one else has access to the data.
 
