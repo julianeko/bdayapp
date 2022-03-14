@@ -56,7 +56,7 @@ function Main({ persons, setPersons }) {
   } else {
     list = [];
     icon = <IoIosArrowForward />;
-    var more = "More";
+    more = "More";
   }
 
   function ShowMore() {
